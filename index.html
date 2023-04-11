@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maze</title>
+  <link rel="stylesheet" href="mazing.css">
+
+</head>
+
+<body>
+    
+      <form id="maze_generator" method="POST" action="index.html">
+      <fieldset>
+        <legend>Playable Maze Generator</legend>
+        <label for="field_height">No. columns</label><span><input id="field_height" type="number" min="2" max="21" name="cols" value="12"></span>
+        <label for="field_width">No. rows</label><span><input id="field_width" type="number" min="2" max="21" name="rows" value="12"></span>
+        <label for="field_speech">Enable speech</label><span><input id="field_speech" type="checkbox" name="speech"></span>
+        <span><a href = "maze.html">Generate maze &raquo;</span></a>
+      </fieldset>
+      </form>
+</body>
+</html>
