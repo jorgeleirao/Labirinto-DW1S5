@@ -9,11 +9,6 @@ Position.prototype.toString = function() {
 
 var Mazing = function(id) {
 
-  // Original JavaScript code by Chirp Internet: www.chirpinternet.eu
-  // Please acknowledge use of this code by including this header.
-
-  /* bind to HTML element */
-
   this.mazeContainer = document.getElementById(id);
 
   this.mazeScore = document.createElement("div");
@@ -36,7 +31,6 @@ var Mazing = function(id) {
       var el =  this.mazeContainer.children[i].children[j];
       this.maze[new Position(i, j)] = el;
       if(el.classList.contains("entrance")) {
-        /* place hero on entrance square */
         this.heroPos = new Position(i, j);
         this.maze[this.heroPos].classList.add("hero");
       }
@@ -50,11 +44,10 @@ var Mazing = function(id) {
   mazeOutputDiv.appendChild(this.mazeMessage);
 
   mazeOutputDiv.style.width = this.mazeContainer.scrollWidth + "px";
-  this.setMessage("first find the key");
+  this.setMessage("Procure a saída!");
 
   this.mazeContainer.insertAdjacentElement("afterend", mazeOutputDiv);
 
-  /* activate control keys */
 
   this.keyPressHandler = this.mazeKeyPressHandler.bind(this);
   document.addEventListener("keydown", this.keyPressHandler, false);
@@ -67,23 +60,15 @@ Mazing.prototype.enableSpeech = function() {
 
 Mazing.prototype.setMessage = function(text) {
 
-  /* display message on screen */
   this.mazeMessage.innerHTML = text;
   this.mazeScore.innerHTML = this.heroScore;
-
-  if(this.utter && text.match(/^\w/)) {
-    /* speak message aloud */
-    this.utter.text = text;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(this.utter);
-  }
 
 };
 
 Mazing.prototype.heroTakeTreasure = function() {
   this.maze[this.heroPos].classList.remove("nubbin");
   this.heroScore += 10;
-  this.setMessage("yay, treasure!");
+  this.setMessage("Você encontrou tesouro!");
 };
 
 Mazing.prototype.heroTakeKey = function() {
@@ -91,7 +76,7 @@ Mazing.prototype.heroTakeKey = function() {
   this.heroHasKey = true;
   this.heroScore += 20;
   this.mazeScore.classList.add("has-key");
-  this.setMessage("you now have the key!");
+  this.setMessage("Você encontrou a chave!");
 };
 
 Mazing.prototype.gameOver = function(text) {
@@ -105,7 +90,7 @@ Mazing.prototype.heroWins = function() {
   this.mazeScore.classList.remove("has-key");
   this.maze[this.heroPos].classList.remove("door");
   this.heroScore += 50;
-  this.gameOver("you finished !!!");
+  this.gameOver("Você completou o labirinto!");
 };
 
 Mazing.prototype.tryMoveHero = function(pos) {
@@ -116,17 +101,14 @@ Mazing.prototype.tryMoveHero = function(pos) {
 
   var nextStep = this.maze[pos].className;
 
-  /* before moving */
 
   if(nextStep.match(/sentinel/)) {
-    /* ran into a moster - lose points */
     this.heroScore = Math.max(this.heroScore - 5, 0);
 
     if(!this.childMode && (this.heroScore <= 0)) {
-      /* game over */
-      this.gameOver("sorry, you didn't make it.");
+      this.gameOver("Você não conseguiu completar o labirinto...");
     } else {
-      this.setMessage("ow, that hurt!");
+      this.setMessage("oof ouchie owie");
     }
 
     return;
@@ -140,18 +122,16 @@ Mazing.prototype.tryMoveHero = function(pos) {
     if(this.heroHasKey) {
       this.heroWins();
     } else {
-      this.setMessage("you need a key to unlock the door");
+      this.setMessage("Você precisa de uma chava para destrancar a porta!");
       return;
     }
   }
 
-  /* move hero one step */
 
   this.maze[this.heroPos].classList.remove("hero");
   this.maze[pos].classList.add("hero");
   this.heroPos = pos;
 
-  /* check what was stepped on */
 
   if(nextStep.match(/nubbin/)) {
     this.heroTakeTreasure();
@@ -172,8 +152,7 @@ Mazing.prototype.tryMoveHero = function(pos) {
     this.heroScore--;
 
     if(this.heroScore <= 0) {
-      /* game over */
-      this.gameOver("sorry, you didn't make it");
+      this.gameOver("Você não conseguiu completar o labirinto...");
       return;
     }
 
@@ -220,5 +199,5 @@ Mazing.prototype.mazeKeyPressHandler = function(e) {
 Mazing.prototype.setChildMode = function() {
   this.childMode = true;
   this.heroScore = 0;
-  this.setMessage("collect all the treasure");
+  this.setMessage("Colete todo o tesouro");
 };

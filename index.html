@@ -4,21 +4,35 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maze</title>
+  <title>Labirinto DW1S5</title>
   <link rel="stylesheet" href="mazing.css">
 
 </head>
 
 <body>
     
-      <form id="maze_generator" method="POST" action="index.html">
+      <form id="maze_generator">
       <fieldset>
-        <legend>Playable Maze Generator</legend>
-        <label for="field_height">No. columns</label><span><input id="field_height" type="number" min="2" max="21" name="cols" value="12"></span>
-        <label for="field_width">No. rows</label><span><input id="field_width" type="number" min="2" max="21" name="rows" value="12"></span>
-        <label for="field_speech">Enable speech</label><span><input id="field_speech" type="checkbox" name="speech"></span>
-        <span><a href = "maze.html">Generate maze &raquo;</span></a>
+        <legend>Criar novo jogo</legend>
+        <label for="field_height">Número de colunas</label><span><input id="field_height" type="number" min="2" max="21" name="cols" value="12"></span>
+        <label for="field_width">Número de linhas</label><span><input id="field_width" type="number" min="2" max="21" name="rows" value="12"></span>
+        <span><button type = "submit">Gerar labirinto &raquo;</span></a>
       </fieldset>
       </form>
+      <script>
+        const form = document.getElementById('maze_generator');
+        const height = document.getElementById('field_height');
+        const width = document.getElementById('field_width');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const heightValue = height.value;
+          const widthValue = width.value;
+
+          sessionStorage.setItem('height', heightValue);
+          sessionStorage.setItem('width', widthValue);
+
+          window.location.href = "maze.html"
+        })
+        </script>
 </body>
 </html>

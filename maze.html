@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maze</title>
+  <title>Labirinto DW1S5</title>
   <link rel="stylesheet" href="mazing.css">
 
 </head>
@@ -21,26 +21,18 @@
 
   var Maze, MazeGame;
 
-  const makeMaze = (id, width, height, speech = false) => {
+  const makeMaze = (id, width, height) => {
     Maze = new FancyMazeBuilder(width, height);
     Maze.display(id);
     MazeGame = new Mazing("maze");
-    if(speech) {
-      MazeGame.enableSpeech();
-    }
   };
 
-  makeMaze("maze_container", 12, 12);
+  const h = Number(sessionStorage.getItem('height'));
+  const w = Number(sessionStorage.getItem('width'));
+
+
+  makeMaze("maze_container", h, w);
 
 </script>
 
-      
-<div id="maze_splash" style="display: none;">
-    <div>
-      <p>Control keys</p>
-      <p>&#8678; &#8680; &#8679; &#8681;</p>
-      <p><small>Click to start</small></p>
-    </div>
-  </div>
-  
 </body>
