@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Labirinto DW1S5</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div id="labirinto_container">
+        <!-- -->
+    </div>
+    <div>
+      <a href="index.html">Voltar</a>
+    </div>
+      <script src="labirintobuilder.js"></script>
+<script src="extlabirintobuilder.js"></script>
+<script src="lab.js"></script>
+<script>
+
+  var Labirinto, CriarJogo;
+
+  const criarLabirinto = (id, width, height) => {
+    Labirinto = new ExtLabirintoBuilder(width, height);
+    Labirinto.display(id);
+    CriarJogo = new Lab("labirinto");
+  };
+
+  const h = Number(sessionStorage.getItem('height'));
+  const w = Number(sessionStorage.getItem('width'));
+
+
+  criarLabirinto("labirinto_container", h, w);
+
+</script>
+
+</body>

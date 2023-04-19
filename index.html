@@ -5,23 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Labirinto DW1S5</title>
-  <link rel="stylesheet" href="mazing.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
     
-      <form id="maze_generator">
+      <form id="labirinto_generator">
       <fieldset>
         <legend>Criar novo jogo</legend>
-        <label for="field_height">Número de colunas</label><span><input id="field_height" type="number" min="2" max="21" name="cols" value="12"></span>
-        <label for="field_width">Número de linhas</label><span><input id="field_width" type="number" min="2" max="21" name="rows" value="12"></span>
+        <label for="field_height">Número de colunas</label><span><input id="field_height" type="number" min="2" max="50" name="cols" value="12"></span>
+        <label for="field_width">Número de linhas</label><span><input id="field_width" type="number" min="2" max="50" name="rows" value="12"></span>
         <span><button type = "submit">Gerar labirinto &raquo;</span>
         
       </fieldset>
       </form>
       <script>
-        const form = document.getElementById('maze_generator');
+        const form = document.getElementById('labirinto_generator');
         const height = document.getElementById('field_height');
         const width = document.getElementById('field_width');
         form.addEventListener('submit', function(e) {
@@ -32,7 +32,7 @@
           sessionStorage.setItem('height', heightValue);
           sessionStorage.setItem('width', widthValue);
 
-          window.location.href = "maze.html"
+          window.location.href = "labirinto.html"
         })
         </script>
 </body>
