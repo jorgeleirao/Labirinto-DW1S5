@@ -103,13 +103,7 @@ Lab.prototype.tryMoveHero = function(pos) {
 
 
   if(nextStep.match(/sentinel/)) {
-    this.heroScore = Math.max(this.heroScore - 5, 0);
-
-    if(!this.childMode && (this.heroScore <= 0)) {
-      this.gameOver("Você não conseguiu completar o labirinto...");
-    } else {
-      this.setMessage("oof ouchie owie");
-    }
+    this.gameOver("Você foi devorado!")
 
     return;
   }
@@ -122,7 +116,7 @@ Lab.prototype.tryMoveHero = function(pos) {
     if(this.heroHasKey) {
       this.heroWins();
     } else {
-      this.setMessage("Você precisa de uma chava para destrancar a porta!");
+      this.setMessage("Você precisa de uma chave para destrancar a porta!");
       return;
     }
   }
